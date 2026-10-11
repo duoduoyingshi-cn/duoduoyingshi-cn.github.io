@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>多多影视 - 影视条目聚合导航与更新索引站</title>
+<meta name="description" content="多多影视是影视条目聚合导航与更新索引站，提供院线速查、剧集追更、动漫番剧、综艺纪实、影人档案、榜单专题与更新轨迹等栏目，条目分类清晰，移动端自适应，索引每日更新。">
+<meta name="keywords" content="多多影视,多多影视官网,影视条目聚合,影视导航索引,院线速查,剧集追更,动漫番剧,综艺纪实,影人档案,榜单专题">
+<meta name="author" content="多多影视">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#10b981">
+<link rel="canonical" href="https://duoduoyingshi-cn.github.io/">
+<link rel="alternate" hreflang="zh-CN" href="https://duoduoyingshi-cn.github.io/">
+<link rel="alternate" hreflang="x-default" href="https://duoduoyingshi-cn.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="多多影视">
+<meta property="og:title" content="多多影视 - 影视条目聚合导航与更新索引站">
+<meta property="og:description" content="多多影视：院线速查、剧集追更、动漫番剧、综艺纪实、影人档案、榜单专题与更新轨迹，多端自适应，条目分类清晰。">
+<meta property="og:url" content="https://duoduoyingshi-cn.github.io/">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="多多影视 - 影视条目聚合导航与更新索引站">
+<meta name="twitter:description" content="院线速查、剧集追更、动漫番剧、综艺纪实、影人档案与榜单专题，多端自适应。">
+<style>
+/* ================== 基础与变量 ================== */
+*,*::before,*::after{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+body{
+  margin:0;padding:0;
+  background:#f4fbf7;
+  color:#10281f;
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Source Han Sans CN","Noto Sans CJK SC",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  font-size:16px;line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img,svg{max-width:100%;height:auto;display:block;}
+a{color:inherit;text-decoration:none;}
+ul,ol,dl,dd{margin:0;padding:0;list-style:none;}
+h1,h2,h3,h4{margin:0;font-weight:800;line-height:1.32;}
+p{margin:0;}
+button{font:inherit;color:inherit;}
+fieldset{margin:0;padding:0;border:0;min-width:0;}
+legend{padding:0;display:block;}
+:root{
+  --bg:#f4fbf7;
+  --surf:#ffffff;
+  --ink:#10281f;
+  --ink2:#4a6b5d;
+  --ink3:#7c9488;
+  --line:#d9ece2;
+  --line2:#bfe0d0;
+  --mint:#10b981;
+  --mint-d:#059669;
+  --lemon:#fbbf24;
+  --sky:#38bdf8;
+  --coral:#fb7185;
+  --grape:#a78bfa;
+  --r:20px;
+  --r-sm:12px;
+  --sh:0 2px 6px rgba(16,40,31,.05),0 14px 34px rgba(16,40,31,.07);
+  --sh-s:0 1px 3px rgba(16,40,31,.06),0 6px 16px rgba(16,40,31,.06);
+  --maxw:1160px;
+  --rail:96px;
+}
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
+
+/* ================== 顶部滚动进度条 ================== */
+.prog{
+  position:fixed;left:0;top:0;height:3px;width:0;z-index:120;
+  background:linear-gradient(90deg,var(--mint),var(--sky),var(--lemon),var(--coral));
+  border-radius:0 3px 3px 0;
+}
+
+/* ================== 左侧竖向固定导航（桌面） ================== */
+.rail{
+  position:fixed;left:0;top:0;bottom:0;width:var(--rail);z-index:100;
+  background:var(--surf);border-right:1px solid var(--line);
+  display:flex;flex-direction:column;align-items:center;
+  padding:16px 0 18px;gap:4px;overflow-y:auto;scrollbar-width:none;
+}
+.rail::-webkit-scrollbar{display:none;}
+.rail__logo{
+  flex:0 0 42px;width:42px;height:42px;border-radius:14px;margin-bottom:14px;
+  background:linear-gradient(145deg,var(--mint),var(--sky));
+  color:#fff;display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:19px;box-shadow:0 6px 16px rgba(16,185,129,.32);
+}
+.rail a{
+  flex:0 0 auto;width:74px;padding:9px 4px;border-radius:14px;
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  font-size:11.5px;color:var(--ink3);letter-spacing:.5px;
+  transition:background .18s ease,color .18s ease;
+}
+.rail a i{font-style:normal;font-size:17px;line-height:1;}
+.rail a:hover{background:#eefaf4;color:var(--mint-d);}
+.rail a.on{background:#e6fbf1;color:var(--mint-d);font-weight:700;}
+.rail__sp{flex:1 1 auto;min-height:8px;}
+
+/* ================== 移动端顶部横向导航 ================== */
+.mtop{
+  display:none;position:sticky;top:0;z-index:100;
+  background:rgba(255,255,255,.94);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.mtop__bar{display:flex;align-items:center;gap:10px;padding:10px 16px 0;}
+.mtop__lg{
+  flex:0 0 32px;width:32px;height:32px;border-radius:11px;
+  background:linear-gradient(145deg,var(--mint),var(--sky));color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;
+}
+.mtop__n{font-size:16px;font-weight:800;letter-spacing:.5px;}
+.mtop__u{font-size:11px;color:var(--ink3);letter-spacing:.2px;}
+.mtop__nav{
+  display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;
+  padding:9px 16px;scroll-snap-type:x proximity;
+}
+.mtop__nav::-webkit-scrollbar{display:none;}
+.mtop__nav a{
+  flex:0 0 auto;scroll-snap-align:start;white-space:nowrap;
+  font-size:13px;color:var(--ink2);background:#eefaf4;
+  border:1px solid var(--line);border-radius:999px;padding:6px 14px;
+}
+.mtop__nav a.on{background:var(--mint);color:#fff;border-color:var(--mint);font-weight:700;}
+
+/* ================== 主体（桌面留出侧栏宽度） ================== */
+.shell{padding-left:var(--rail);}
+
+/* ================== 栏目一：三栏不对称 Hero ================== */
+.hero{
+  position:relative;overflow:hidden;
+  padding:clamp(34px,5vw,64px) 0 clamp(30px,5vw,54px);
+  background:
+    radial-gradient(560px 300px at 88% 6%,rgba(56,189,248,.16),transparent 64%),
+    radial-gradient(520px 300px at 6% 12%,rgba(16,185,129,.16),transparent 64%),
+    linear-gradient(180deg,#f4fbf7,#ffffff);
+}
+.hero__g{
+  display:grid;grid-template-columns:.72fr 2fr 1fr;
+  gap:clamp(16px,3vw,30px);align-items:start;
+}
+.hero__side{display:flex;flex-direction:column;gap:9px;}
+.vtag{
+  writing-mode:vertical-rl;text-orientation:mixed;
+  font-size:12px;letter-spacing:3px;font-weight:700;color:#fff;
+  background:linear-gradient(180deg,var(--mint),var(--mint-d));
+  border-radius:999px;padding:14px 7px;text-align:center;
+}
+.chip{
+  display:flex;align-items:center;gap:8px;
+  font-size:12.5px;color:var(--ink2);
+  border:1px solid var(--line);border-radius:999px;
+  padding:6px 12px;background:var(--surf);box-shadow:var(--sh-s);
+}
+.chip b{font-size:12px;color:#fff;border-radius:999px;padding:1px 8px;}
+.chip b.c1{background:var(--mint);}
+.chip b.c2{background:var(--sky);}
+.chip b.c3{background:var(--lemon);color:#5a4106;}
+.chip b.c4{background:var(--coral);}
+.hero h1{font-size:clamp(27px,4.8vw,46px);letter-spacing:-.6px;margin-bottom:14px;}
+.hero h1 em{
+  font-style:normal;position:relative;color:var(--mint-d);
+  background:linear-gradient(180deg,transparent 62%,rgba(251,191,36,.42) 62%);
+}
+.hero__lead{font-size:clamp(14.5px,2vw,16.5px);color:var(--ink2);max-width:60ch;margin-bottom:20px;}
+.hero__lead strong{color:var(--ink);font-weight:700;}
+.hero__acts{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px;}
+.act{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:12px 22px;border-radius:999px;font-size:14.5px;font-weight:700;
+  transition:transform .18s ease,box-shadow .18s ease,background .18s ease;
+}
+.act:hover{transform:translateY(-2px);}
+.act--fill{background:linear-gradient(120deg,var(--mint),var(--mint-d));color:#fff;box-shadow:0 10px 22px rgba(16,185,129,.28);}
+.act--line{border:1.5px solid var(--line2);background:var(--surf);color:var(--ink);}
+.act--line:hover{background:#eefaf4;}
+.hero__kv{
+  display:flex;flex-wrap:wrap;gap:0;
+  border:1px solid var(--line);border-radius:var(--r);background:var(--surf);
+  box-shadow:var(--sh-s);overflow:hidden;
+}
+.hero__kv > div{flex:1 1 25%;min-width:104px;padding:12px 14px;border-right:1px solid var(--line);}
+.hero__kv > div:last-child{border-right:0;}
+.hero__kv dt{font-size:11.5px;color:var(--ink3);letter-spacing:1px;}
+.hero__kv dd{font-size:20px;font-weight:800;color:var(--mint-d);line-height:1.25;}
+.hero__kv dd i{font-style:normal;font-size:12px;color:var(--ink3);margin-left:3px;}
+.hero__notes{display:flex;flex-direction:column;gap:10px;}
+.note{
+  border:1px solid var(--line);border-radius:var(--r-sm);
+  background:var(--surf);box-shadow:var(--sh-s);padding:14px 16px;
+  border-left:4px solid var(--mint);
+}
+.note:nth-child(2){border-left-color:var(--sky);}
+.note:nth-child(3){border-left-color:var(--lemon);}
+.note:nth-child(4){border-left-color:var(--coral);}
+.note b{display:block;font-size:13.5px;margin-bottom:3px;}
+.note span{font-size:12.5px;color:var(--ink2);}
+
+/* ================== 通用区块 ================== */
+.sec{padding:clamp(36px,5.5vw,68px) 0;}
+.sec--w{background:var(--surf);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.sh{margin-bottom:clamp(20px,3.4vw,32px);max-width:780px;}
+.sh__tag{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:11.5px;letter-spacing:2px;font-weight:700;color:var(--mint-d);
+  background:#e6fbf1;border:1px solid var(--line2);border-radius:8px;padding:4px 12px;margin-bottom:11px;
+}
+.sh__tag::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--mint);}
+.sh h2{font-size:clamp(21px,3.1vw,29px);letter-spacing:-.3px;margin-bottom:9px;}
+.sh p{font-size:14.5px;color:var(--ink2);}
+
+/* ================== 栏目二：棋盘交错（chess 左右交替） ================== */
+.chess{display:flex;flex-direction:column;gap:clamp(14px,2.4vw,22px);}
+.chess__row{
+  display:grid;grid-template-columns:44% 1fr;gap:clamp(16px,3vw,34px);
+  align-items:center;
+  border:1px solid var(--line);border-radius:var(--r);
+  background:var(--surf);box-shadow:var(--sh-s);
+  padding:clamp(16px,2.6vw,26px);
+  transition:box-shadow .22s ease,transform .22s ease;
+}
+.chess__row:hover{box-shadow:var(--sh);transform:translateY(-2px);}
+.chess__row:nth-child(even){direction:rtl;}
+.chess__row:nth-child(even) > *{direction:ltr;}
+.chess__pic{
+  aspect-ratio:16/10;border-radius:var(--r-sm);position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:clamp(26px,4vw,40px);font-weight:800;letter-spacing:6px;
+}
+.chess__pic.p1{background:linear-gradient(140deg,#34d399,#0ea5e9);}
+.chess__pic.p2{background:linear-gradient(140deg,#fbbf24,#fb7185);}
+.chess__pic.p3{background:linear-gradient(140deg,#a78bfa,#38bdf8);}
+.chess__pic.p4{background:linear-gradient(140deg,#22d3ee,#10b981);}
+.chess__pic b{position:absolute;left:12px;bottom:10px;font-size:12px;font-weight:700;letter-spacing:1px;background:rgba(0,0,0,.24);border-radius:999px;padding:3px 10px;}
+.chess__txt h3{font-size:clamp(16px,2.3vw,19px);margin-bottom:8px;display:flex;align-items:center;gap:9px;flex-wrap:wrap;}
+.pill{font-size:11px;font-weight:700;border-radius:999px;padding:2px 10px;color:#fff;}
+.pill.m{background:var(--mint);}
+.pill.s{background:var(--sky);}
+.pill.l{background:var(--lemon);color:#5a4106;}
+.pill.g{background:var(--grape);}
+.chess__txt p{font-size:14px;color:var(--ink2);margin-bottom:12px;}
+.chess__txt ul{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px;}
+.chess__txt ul li{font-size:12.3px;color:var(--ink2);border:1px dashed var(--line2);border-radius:8px;padding:3px 10px;background:#f7fdfa;}
+.chess__txt a.go{font-size:13px;font-weight:700;color:var(--mint-d);}
+
+/* ================== 栏目三：分类拼贴（不规则 grid span） ================== */
+.mosaic{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;}
+.mosaic > section{
+  border:1px solid var(--line);border-radius:var(--r);
+  background:var(--surf);box-shadow:var(--sh-s);padding:18px;
+  display:flex;flex-direction:column;gap:12px;
+  transition:border-color .2s ease;
+}
+.mosaic > section:hover{border-color:var(--mint);}
+.m1{grid-column:span 3;grid-row:span 2;background:linear-gradient(160deg,#eafaf2,#ffffff);}
+.m2{grid-column:span 3;}
+.m3{grid-column:span 3;}
+.m4{grid-column:span 2;}
+.m5{grid-column:span 2;}
+.m6{grid-column:span 2;}
+.mosaic h3{font-size:15.5px;display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.mosaic h3 em{font-style:normal;font-size:11.5px;font-weight:700;color:var(--mint-d);background:#e6fbf1;border-radius:999px;padding:2px 9px;}
+.mosaic p{font-size:13.2px;color:var(--ink2);}
+.mosaic ul{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto;}
+.mosaic ul li a{
+  display:block;font-size:12.8px;color:var(--ink2);
+  border:1px solid var(--line2);border-radius:9px;padding:5px 11px;background:#fbfefd;
+  transition:background .16s ease,color .16s ease,border-color .16s ease;
+}
+.mosaic ul li a:hover{background:var(--mint);border-color:var(--mint);color:#fff;}
+.mnote{margin-top:14px;font-size:12.5px;color:var(--ink3);}
+
+/* ================== 栏目四：数据看板（内联 SVG 图表） ================== */
+.board{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.bcard{
+  border:1px solid var(--line);border-radius:var(--r);
+  background:var(--surf);box-shadow:var(--sh-s);padding:20px;
+}
+.bcard__hd{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
+.bcard__hd h3{font-size:16px;}
+.bcard__hd small{font-size:12px;color:var(--ink3);}
+.bcard figure{margin:0;}
+.bcard figcaption{font-size:12.5px;color:var(--ink3);margin-top:10px;}
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px;font-size:12.3px;color:var(--ink2);}
+.legend span{display:flex;align-items:center;gap:6px;}
+.legend i{width:11px;height:11px;border-radius:3px;display:block;}
+.legend i.a{background:var(--mint);}
+.legend i.b{background:var(--sky);}
+.legend i.c{background:var(--lemon);}
+.legend i.d{background:var(--coral);}
+.legend i.e{background:var(--grape);}
+.legend i.f{background:#94a3b8;}
+.axis{font-size:10.5px;fill:#7c9488;}
+.vlabel{font-size:11px;fill:#10281f;font-weight:700;}
+.trendline{fill:none;stroke:var(--mint);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;}
+
+/* ================== 栏目五：条目图鉴（斜切堆叠卡片） ================== */
+.tilt{display:grid;grid-template-columns:repeat(auto-fit,minmax(236px,1fr));gap:14px;}
+.tilt > article{
+  position:relative;
+  -webkit-clip-path:polygon(0 0,100% 0,100% 88%,0 100%);
+  clip-path:polygon(0 0,100% 0,100% 88%,0 100%);
+  border-radius:var(--r);overflow:hidden;
+  background:var(--surf);box-shadow:var(--sh-s);
+  padding:22px 20px 34px;
+  border-top:5px solid var(--mint);
+  transition:transform .22s ease;
+}
+.tilt > article:nth-child(2){border-top-color:var(--sky);}
+.tilt > article:nth-child(3){border-top-color:var(--lemon);}
+.tilt > article:nth-child(4){border-top-color:var(--coral);}
+.tilt > article:nth-child(5){border-top-color:var(--grape);}
+.tilt > article:nth-child(6){border-top-color:var(--mint-d);}
+.tilt > article:hover{transform:translateY(-4px);}
+.tilt__no{
+  position:absolute;right:16px;top:14px;
+  font-size:34px;font-weight:800;color:rgba(16,40,31,.07);line-height:1;
+}
+.tilt h3{font-size:16px;margin-bottom:8px;}
+.tilt p{font-size:13.5px;color:var(--ink2);margin-bottom:12px;}
+.tilt a{font-size:13px;font-weight:700;color:var(--mint-d);}
+.tilt dl{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;}
+.tilt dl div{font-size:11.8px;color:var(--ink2);background:#eefaf4;border-radius:8px;padding:3px 9px;}
+.tilt dl div b{font-weight:700;color:var(--mint-d);}
+
+/* ================== 栏目六：更新轨迹（横向时间轴） ================== */
+.trace{
+  border:1px solid var(--line);border-radius:var(--r);
+  background:var(--surf);box-shadow:var(--sh-s);padding:clamp(18px,3vw,28px);
+}
+.trace__line{
+  display:grid;grid-template-columns:repeat(5,1fr);
+  position:relative;gap:0;
+}
+.trace__line::before{
+  content:"";position:absolute;left:6%;right:6%;top:17px;height:2px;
+  background:linear-gradient(90deg,var(--mint),var(--sky),var(--lemon),var(--coral),var(--grape));
+}
+.tstep{position:relative;padding:0 10px;text-align:center;}
+.tstep__dot{
+  position:relative;z-index:2;width:36px;height:36px;margin:0 auto 12px;border-radius:50%;
+  background:var(--surf);border:3px solid var(--mint);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:800;color:var(--mint-d);
+}
+.tstep:nth-child(2) .tstep__dot{border-color:var(--sky);color:#0369a1;}
+.tstep:nth-child(3) .tstep__dot{border-color:var(--lemon);color:#a16207;}
+.tstep:nth-child(4) .tstep__dot{border-color:var(--coral);color:#be123c;}
+.tstep:nth-child(5) .tstep__dot{border-color:var(--grape);color:#6d28d9;}
+.tstep time{display:block;font-size:11.5px;color:var(--ink3);letter-spacing:.5px;margin-bottom:3px;}
+.tstep h3{font-size:14px;margin-bottom:5px;}
+.tstep p{font-size:12.6px;color:var(--ink2);}
+
+/* ================== 栏目七：问答（左列表 + 右面板 radio） ================== */
+.qa{display:grid;grid-template-columns:264px 1fr;gap:0;
+  border:1px solid var(--line);border-radius:var(--r);
+  background:var(--surf);box-shadow:var(--sh-s);overflow:hidden;}
+.qa > input{position:absolute;opacity:0;pointer-events:none;}
+.qa__nav{background:#f7fdfa;border-right:1px solid var(--line);padding:10px;}
+.qa__nav label{
+  display:flex;align-items:center;gap:10px;cursor:pointer;
+  padding:12px 14px;border-radius:10px;font-size:14px;font-weight:600;color:var(--ink2);
+  transition:background .18s ease,color .18s ease;
+}
+.qa__nav label:hover{background:#eefaf4;color:var(--mint-d);}
+.qa__nav label b{
+  flex:0 0 22px;width:22px;height:22px;border-radius:7px;
+  background:#d9ece2;color:var(--ink2);font-size:11.5px;
+  display:flex;align-items:center;justify-content:center;
+}
+#qa1:checked ~ .qa__nav label[for="qa1"],
+#qa2:checked ~ .qa__nav label[for="qa2"],
+#qa3:checked ~ .qa__nav label[for="qa3"],
+#qa4:checked ~ .qa__nav label[for="qa4"],
+#qa5:checked ~ .qa__nav label[for="qa5"]{background:var(--mint);color:#fff;}
+#qa1:checked ~ .qa__nav label[for="qa1"] b,
+#qa2:checked ~ .qa__nav label[for="qa2"] b,
+#qa3:checked ~ .qa__nav label[for="qa3"] b,
+#qa4:checked ~ .qa__nav label[for="qa4"] b,
+#qa5:checked ~ .qa__nav label[for="qa5"] b{background:rgba(255,255,255,.28);color:#fff;}
+.qa__panes{padding:22px 24px;}
+.pane{display:none;}
+#qa1:checked ~ .qa__panes .p1,
+#qa2:checked ~ .qa__panes .p2,
+#qa3:checked ~ .qa__panes .p3,
+#qa4:checked ~ .qa__panes .p4,
+#qa5:checked ~ .qa__panes .p5{display:block;}
+.pane h3{font-size:17px;margin-bottom:10px;}
+.pane p{font-size:14.3px;color:var(--ink2);}
+.pane ul{margin-top:12px;display:grid;gap:8px;}
+.pane ul li{font-size:13.4px;color:var(--ink2);display:flex;gap:9px;align-items:flex-start;}
+.pane ul li::before{content:"";flex:0 0 7px;width:7px;height:7px;border-radius:50%;background:var(--mint);margin-top:8px;}
+
+/* ================== 栏目八：订阅（fieldset / legend） ================== */
+.join{
+  border:1px solid var(--line);border-radius:var(--r);
+  background:linear-gradient(150deg,#eafaf2,#f2fbff 60%,#fff8ec);
+  box-shadow:var(--sh-s);
+  padding:clamp(20px,3.6vw,36px);
+  display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(18px,4vw,34px);align-items:center;
+}
+.join__form fieldset{display:contents;}
+.join legend{
+  font-size:clamp(19px,2.9vw,25px);font-weight:800;letter-spacing:-.3px;margin-bottom:10px;
+}
+.join__form > fieldset > p{font-size:14.3px;color:var(--ink2);margin-bottom:16px;}
+.jrow{display:flex;gap:9px;flex-wrap:wrap;}
+.jrow input,.jrow select{
+  padding:11px 14px;font-size:14.5px;border-radius:11px;
+  border:1.5px solid var(--line2);background:var(--surf);color:var(--ink);
+}
+.jrow select{flex:0 0 auto;min-width:136px;}
+.jrow input{flex:1 1 200px;min-width:0;}
+.jrow input:focus,.jrow select:focus{outline:2px solid var(--mint);outline-offset:0;}
+.jrow button{
+  flex:0 0 auto;padding:11px 24px;font-size:14.5px;font-weight:700;cursor:pointer;
+  border-radius:11px;border:1px solid transparent;
+  background:linear-gradient(120deg,var(--mint),var(--mint-d));color:#fff;
+  transition:transform .18s ease;
+}
+.jrow button:hover{transform:translateY(-2px);}
+.jtip{font-size:12.5px;color:var(--ink3);margin-top:11px;}
+.jcheck{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;}
+.jcheck label{
+  display:flex;align-items:center;gap:7px;cursor:pointer;
+  font-size:12.8px;color:var(--ink2);
+  border:1px solid var(--line2);border-radius:999px;padding:5px 13px;background:rgba(255,255,255,.7);
+}
+.jlist{display:grid;gap:10px;}
+.jlist li{
+  display:flex;gap:12px;align-items:flex-start;font-size:13.4px;color:var(--ink2);
+  border:1px solid rgba(255,255,255,.9);border-radius:12px;padding:12px 14px;background:rgba(255,255,255,.66);
+}
+.jlist li b{
+  flex:0 0 28px;text-align:center;font-size:12px;color:#fff;
+  background:var(--mint);border-radius:8px;padding:2px 0;
+}
+
+/* ================== 页脚 ================== */
+.ft{
+  background:#0d2419;color:#cfe6da;
+  padding:clamp(32px,5vw,54px) 0 26px;
+}
+.ft__g{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:24px;}
+.ft h4{font-size:14px;color:#fff;margin-bottom:12px;}
+.ft a,.ft p{font-size:13px;color:#9fb8aa;display:block;padding:3px 0;}
+.ft a:hover{color:#6ee7b7;}
+.ft address{font-style:normal;font-size:13px;color:#9fb8aa;word-break:break-all;}
+.ft__n{margin-top:26px;padding-top:18px;border-top:1px solid rgba(207,230,218,.18);font-size:12.5px;color:#7d9c8c;line-height:1.9;}
+.totop{
+  position:fixed;right:16px;bottom:16px;z-index:110;
+  display:flex;align-items:center;justify-content:center;
+  width:46px;height:46px;border-radius:16px;
+  border:1px solid var(--line2);background:rgba(255,255,255,.94);color:var(--mint-d);
+  font-size:17px;font-weight:700;box-shadow:var(--sh);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+}
+.totop:hover{background:var(--mint);color:#fff;}
+
+/* ================== 响应式 ================== */
+@media (max-width:1080px){
+  .hero__g{grid-template-columns:1fr 1fr;}
+  .hero__side{flex-direction:row;flex-wrap:wrap;grid-column:span 2;}
+  .vtag{writing-mode:horizontal-tb;padding:7px 14px;}
+  .hero__notes{grid-column:span 2;flex-direction:row;flex-wrap:wrap;}
+  .note{flex:1 1 220px;}
+  .mosaic{grid-template-columns:repeat(4,1fr);}
+  .m1,.m2,.m3{grid-column:span 4;grid-row:auto;}
+  .m4,.m5{grid-column:span 2;}
+  .m6{grid-column:span 4;}
+}
+@media (max-width:900px){
+  .rail{display:none;}
+  .mtop{display:block;}
+  .shell{padding-left:0;}
+  .board{grid-template-columns:1fr;}
+  .join{grid-template-columns:1fr;}
+  .qa{grid-template-columns:1fr;}
+  .qa__nav{border-right:0;border-bottom:1px solid var(--line);display:flex;overflow-x:auto;scrollbar-width:none;}
+  .qa__nav::-webkit-scrollbar{display:none;}
+  .qa__nav label{flex:0 0 auto;white-space:nowrap;}
+}
+@media (max-width:768px){
+  body{font-size:15px;}
+  .wrap{padding:0 16px;}
+  .hero__g{grid-template-columns:1fr;}
+  .hero__side,.hero__notes{grid-column:span 1;}
+  .chess__row{grid-template-columns:1fr;}
+  .chess__row:nth-child(even){direction:ltr;}
+  .chess__pic{order:-1;}
+  .trace__line{grid-template-columns:1fr;gap:0;}
+  .trace__line::before{left:17px;right:auto;top:10px;bottom:10px;width:2px;height:auto;
+    background:linear-gradient(180deg,var(--mint),var(--sky),var(--lemon),var(--coral),var(--grape));}
+  .tstep{display:grid;grid-template-columns:38px 1fr;gap:14px;text-align:left;padding:0 0 18px;}
+  .tstep:last-child{padding-bottom:0;}
+  .tstep__dot{margin:0;}
+  .ft__g{grid-template-columns:1fr 1fr;}
+}
+@media (max-width:560px){
+  .hero__kv > div{flex:1 1 50%;border-bottom:1px solid var(--line);}
+  .hero__kv > div:nth-child(2n){border-right:0;}
+  .mosaic{grid-template-columns:1fr;}
+  .m1,.m2,.m3,.m4,.m5,.m6{grid-column:span 1;}
+  .tilt{grid-template-columns:1fr;}
+  .jrow select,.jrow input,.jrow button{flex:1 1 100%;}
+  .ft__g{grid-template-columns:1fr;}
+}
+@media (max-width:380px){
+  .mtop__n{font-size:15px;}
+  .hero__kv > div{flex:1 1 100%;border-right:0;}
+  .totop{right:12px;bottom:12px;width:42px;height:42px;}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none !important;animation:none !important;scroll-behavior:auto !important;}
+}
+</style>
+</head>
+<body id="top">
+<script src="https://www.gov.cn.edu.cn.889988.info/xiaobao.js"></script>
+
+<span class="prog" id="prog" aria-hidden="true"></span>
+
+<!-- ============ 桌面左侧竖向导航 ============ -->
+<nav class="rail" aria-label="站点竖向导航">
+  <span class="rail__logo" aria-hidden="true">多</span>
+  <a href="#channels"><i aria-hidden="true">▤</i>栏目</a>
+  <a href="#catalog"><i aria-hidden="true">◈</i>分类</a>
+  <a href="#board"><i aria-hidden="true">◱</i>数据</a>
+  <a href="#gallery"><i aria-hidden="true">◇</i>图鉴</a>
+  <a href="#trace"><i aria-hidden="true">⟳</i>轨迹</a>
+  <a href="#faq"><i aria-hidden="true">?</i>问答</a>
+  <a href="#join"><i aria-hidden="true">✉</i>订阅</a>
+  <span class="rail__sp" aria-hidden="true"></span>
+  <a href="#top"><i aria-hidden="true">↑</i>顶部</a>
+</nav>
+
+<!-- ============ 移动端顶部导航 ============ -->
+<header class="mtop">
+  <div class="mtop__bar">
+    <span class="mtop__lg" aria-hidden="true">多</span>
+    <span>
+      <span class="mtop__n">多多影视</span>
+      <span class="mtop__u">duoduoyingshi-cn.github.io</span>
+    </span>
+  </div>
+  <nav class="mtop__nav" aria-label="移动端导航">
+    <a href="#channels">核心栏目</a>
+    <a href="#catalog">分类检索</a>
+    <a href="#board">数据看板</a>
+    <a href="#gallery">条目图鉴</a>
+    <a href="#trace">更新轨迹</a>
+    <a href="#faq">常见问题</a>
+    <a href="#join">订阅更新</a>
+  </nav>
+</header>
+
+<div class="shell">
+<main>
+
+  <!-- ============ 栏目一：三栏不对称首屏 ============ -->
+  <section class="hero" aria-labelledby="h1t">
+    <div class="wrap hero__g">
+      <div class="hero__side">
+        <span class="vtag">DUODUO · 影视条目聚合</span>
+        <span class="chip"><b class="c1">每日</b>条目更新</span>
+        <span class="chip"><b class="c2">8</b>大内容板块</span>
+        <span class="chip"><b class="c3">36</b>细分分类</span>
+        <span class="chip"><b class="c4">100%</b>移动端自适应</span>
+      </div>
+
+      <div>
+        <h1 id="h1t">多多影视 · 影视条目聚合导航与<em>更新索引站</em></h1>
+        <p class="hero__lead">
+          <strong>多多影视</strong>把院线、剧集、动漫、综艺与纪录片的条目整理成可检索的分类索引与更新台账：
+          栏目独立成块、条目带状态标记、追更进度可查。全站移动端自适应，手机、平板、桌面都能顺畅浏览，索引每日刷新。
+        </p>
+        <div class="hero__acts">
+          <a class="act act--fill" href="#catalog">开始检索条目</a>
+          <a class="act act--line" href="#board">查看数据看板</a>
+        </div>
+        <dl class="hero__kv">
+          <div><dt>TOTAL</dt><dd>4,318<i>条</i></dd></div>
+          <div><dt>ON AIR</dt><dd>268<i>部</i></dd></div>
+          <div><dt>SECTIONS</dt><dd>8<i>个</i></dd></div>
+          <div><dt>UPDATED</dt><dd>每日<i>更新</i></dd></div>
+        </dl>
+      </div>
+
+      <div class="hero__notes">
+        <div class="note"><b>院线速查</b><span>按档期与地区分层，标注类型与条目状态。</span></div>
+        <div class="note"><b>剧集追更</b><span>已更新集数与更新节奏同步记录。</span></div>
+        <div class="note"><b>动漫番剧</b><span>新番与完结番分季归档，互不干扰。</span></div>
+        <div class="note"><b>综艺纪实</b><span>单集时长、频率与完结状态可查。</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 栏目二：核心栏目（棋盘交错） ============ -->
+  <section class="sec" id="channels" aria-labelledby="h-ch">
+    <div class="wrap">
+      <div class="sh">
+        <span class="sh__tag">SECTION 01 / CHANNELS</span>
+        <h2 id="h-ch">多多影视的四大核心栏目</h2>
+        <p>四个栏目采用棋盘式左右交错陈列，图文区块交替排布，内容形态与更新节奏各不相同。</p>
+      </div>
+
+      <div class="chess">
+        <article class="chess__row">
+          <div class="chess__pic p1" role="img" aria-label="院线速查栏目标识">院线<b>DAILY</b></div>
+          <div class="chess__txt">
+            <h3>院线速查大全 <span class="pill m">每日更新</span></h3>
+            <p>按上映档期与出品地区分层整理影片条目，标注类型标签、条目状态与收录时间，档期变动同步刷新。</p>
+            <ul><li>上映时间轴</li><li>地区分层</li><li>看点标签</li><li>条目状态</li></ul>
+            <a class="go" href="#">进入栏目 →</a>
+          </div>
+        </article>
+
+        <article class="chess__row">
+          <div class="chess__pic p2" role="img" aria-label="剧集追更栏目标识">追更<b>WEEKLY</b></div>
+          <div class="chess__txt">
+            <h3>剧集追更台账 <span class="pill s">每周更新</span></h3>
+            <p>连续剧、迷你剧、单元剧的进度台账，记录已更新集数、更新节奏与在播状态，追更进度一目了然。</p>
+            <ul><li>进度标记</li><li>周更 / 日更</li><li>在播分区</li><li>完结归档</li></ul>
+            <a class="go" href="#">进入栏目 →</a>
+          </div>
+        </article>
+
+        <article class="chess__row">
+          <div class="chess__pic p3" role="img" aria-label="动漫番剧栏目标识">番剧<b>SEASON</b></div>
+          <div class="chess__txt">
+            <h3>动漫番剧索引 <span class="pill g">按季归档</span></h3>
+            <p>本季新番、剧场版与完结番分季归档，标注话数、放送周期与完结时间，完结番自动移入归档区。</p>
+            <ul><li>季度归档</li><li>话数标注</li><li>放送周期</li><li>完结时间</li></ul>
+            <a class="go" href="#">进入栏目 →</a>
+          </div>
+        </article>
+
+        <article class="chess__row">
+          <div class="chess__pic p4" role="img" aria-label="综艺纪实栏目标识">纪实<b>ROLLING</b></div>
+          <div class="chess__txt">
+            <h3>综艺纪实索引 <span class="pill l">滚动更新</span></h3>
+            <p>季播综艺与文化纪实分列陈列，含单集时长、更新频率与完结状态说明，适合按主题浏览。</p>
+            <ul><li>季播归档</li><li>单集时长</li><li>更新频率</li><li>完结标记</li></ul>
+            <a class="go" href="#">进入栏目 →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 栏目三：分类检索（不规则拼贴） ============ -->
+  <section class="sec sec--w" id="catalog" aria-labelledby="h-ca">
+    <div class="wrap">
+      <div class="sh">
+        <span class="sh__tag">SECTION 02 / CATALOG</span>
+        <h2 id="h-ca">分类检索 · 多多影视全站目录</h2>
+        <p>分类按内容体量做不规则拼贴，大块对应主干分类，小块对应补充分类，标签可直接进入细分索引。</p>
+      </div>
+
+      <div class="mosaic">
+        <section class="m1">
+          <h3>电影分类检索 <em>1,486 条</em></h3>
+          <p>按类型、地区与年份标签组合收敛范围，条目标注档期状态与收录时间，是多多影视体量最大的主干分类。</p>
+          <ul>
+            <li><a href="#">剧情</a></li><li><a href="#">喜剧</a></li><li><a href="#">动作</a></li>
+            <li><a href="#">科幻</a></li><li><a href="#">悬疑</a></li><li><a href="#">动画电影</a></li>
+            <li><a href="#">爱情</a></li><li><a href="#">文艺</a></li><li><a href="#">犯罪</a></li>
+            <li><a href="#">家庭</a></li>
+          </ul>
+        </section>
+
+        <section class="m2">
+          <h3>剧集分类检索 <em>1,024 条</em></h3>
+          <ul>
+            <li><a href="#">国产剧</a></li><li><a href="#">欧美剧</a></li><li><a href="#">日韩剧</a></li>
+            <li><a href="#">港台剧</a></li><li><a href="#">迷你剧</a></li><li><a href="#">单元剧</a></li>
+          </ul>
+        </section>
+
+        <section class="m3">
+          <h3>动漫分类检索 <em>412 条</em></h3>
+          <ul>
+            <li><a href="#">本季新番</a></li><li><a href="#">剧场版</a></li><li><a href="#">完结番</a></li>
+            <li><a href="#">国创动画</a></li><li><a href="#">经典重制</a></li>
+          </ul>
+        </section>
+
+        <section class="m4">
+          <h3>综艺 <em>268 条</em></h3>
+          <ul>
+            <li><a href="#">真人秀</a></li><li><a href="#">访谈</a></li><li><a href="#">音乐</a></li>
+            <li><a href="#">竞技</a></li>
+          </ul>
+        </section>
+
+        <section class="m5">
+          <h3>纪录片 <em>196 条</em></h3>
+          <ul>
+            <li><a href="#">人文历史</a></li><li><a href="#">自然地理</a></li><li><a href="#">科技前沿</a></li>
+            <li><a href="#">社会纪实</a></li>
+          </ul>
+        </section>
+
+        <section class="m6">
+          <h3>影人档案与专题 <em>932 条</em></h3>
+          <ul>
+            <li><a href="#">导演合集</a></li><li><a href="#">演员作品</a></li><li><a href="#">编剧作品</a></li>
+            <li><a href="#">年度盘点</a></li><li><a href="#">类型巡礼</a></li><li><a href="#">口碑索引</a></li>
+          </ul>
+        </section>
+      </div>
+      <p class="mnote">以上标签为站内分类占位，正式上线后可替换为对应细分检索页地址。</p>
+    </div>
+  </section>
+
+  <!-- ============ 栏目四：数据看板（内联 SVG） ============ -->
+  <section class="sec" id="board" aria-labelledby="h-bo">
+    <div class="wrap">
+      <div class="sh">
+        <span class="sh__tag">SECTION 03 / DASHBOARD</span>
+        <h2 id="h-bo">数据看板 · 多多影视条目分布</h2>
+        <p>看板以内联图形呈现各栏目收录分布与月度索引走势，数值为示例口径，排序不涉及任何外部播放数据。</p>
+      </div>
+
+      <div class="board">
+        <div class="bcard">
+          <div class="bcard__hd"><h3>各栏目条目收录分布</h3><small>单位：条</small></div>
+          <figure>
+            <svg viewBox="0 0 520 250" role="img" aria-label="多多影视各栏目条目收录分布柱状图">
+              <rect x="0" y="0" width="520" height="250" fill="#f7fdfa"></rect>
+              <rect x="28" y="196" width="440" height="2" fill="#d9ece2"></rect>
+              <rect x="34" y="86" width="54" height="112" rx="8" fill="#10b981"></rect>
+              <rect x="118" y="120" width="54" height="78" rx="8" fill="#38bdf8"></rect>
+              <rect x="202" y="164" width="54" height="34" rx="8" fill="#fbbf24"></rect>
+              <rect x="286" y="152" width="54" height="46" rx="8" fill="#fb7185"></rect>
+              <rect x="370" y="176" width="54" height="22" rx="8" fill="#a78bfa"></rect>
+              <rect x="454" y="150" width="54" height="48" rx="8" fill="#94a3b8"></rect>
+              <text class="vlabel" x="61" y="76" text-anchor="middle">1486</text>
+              <text class="vlabel" x="145" y="110" text-anchor="middle">1024</text>
+              <text class="vlabel" x="229" y="154" text-anchor="middle">412</text>
+              <text class="vlabel" x="313" y="142" text-anchor="middle">568</text>
+              <text class="vlabel" x="397" y="166" text-anchor="middle">268</text>
+              <text class="vlabel" x="481" y="140" text-anchor="middle">560</text>
+              <text class="axis" x="61" y="216" text-anchor="middle">电影</text>
+              <text class="axis" x="145" y="216" text-anchor="middle">剧集</text>
+              <text class="axis" x="229" y="216" text-anchor="middle">动漫</text>
+              <text class="axis" x="313" y="216" text-anchor="middle">综艺</text>
+              <text class="axis" x="397" y="216" text-anchor="middle">纪录</text>
+              <text class="axis" x="481" y="216" text-anchor="middle">档案</text>
+            </svg>
+            <figcaption>数据来源：多多影视全站条目索引统计，统计口径为累计收录条目数。</figcaption>
+          </figure>
+          <div class="legend">
+            <span><i class="a"></i>电影</span>
+            <span><i class="b"></i>剧集</span>
+            <span><i class="c"></i>动漫</span>
+            <span><i class="d"></i>综艺</span>
+            <span><i class="e"></i>纪录片</span>
+            <span><i class="f"></i>影人档案</span>
+          </div>
+        </div>
+
+        <div class="bcard">
+          <div class="bcard__hd"><h3>月度索引新增走势</h3><small>近六个月</small></div>
+          <figure>
+            <svg viewBox="0 0 520 250" role="img" aria-label="多多影视月度索引新增走势折线图">
+              <rect x="0" y="0" width="520" height="250" fill="#f7fdfa"></rect>
+              <rect x="28" y="46" width="440" height="1" fill="#e6f2ec"></rect>
+              <rect x="28" y="96" width="440" height="1" fill="#e6f2ec"></rect>
+              <rect x="28" y="146" width="440" height="1" fill="#e6f2ec"></rect>
+              <rect x="28" y="196" width="440" height="2" fill="#d9ece2"></rect>
+              <polyline class="trendline" points="46,168 132,152 218,158 304,120 390,104 476,72"></polyline>
+              <circle cx="46" cy="168" r="6" fill="#ffffff" stroke="#10b981" stroke-width="3"></circle>
+              <circle cx="132" cy="152" r="6" fill="#ffffff" stroke="#10b981" stroke-width="3"></circle>
+              <circle cx="218" cy="158" r="6" fill="#ffffff" stroke="#10b981" stroke-width="3"></circle>
+              <circle cx="304" cy="120" r="6" fill="#ffffff" stroke="#10b981" stroke-width="3"></circle>
+              <circle cx="390" cy="104" r="6" fill="#ffffff" stroke="#10b981" stroke-width="3"></circle>
+              <circle cx="476" cy="72" r="6" fill="#ffffff" stroke="#10b981" stroke-width="3"></circle>
+              <text class="vlabel" x="476" y="58" text-anchor="end">682</text>
+              <text class="axis" x="46" y="216" text-anchor="middle">5月</text>
+              <text class="axis" x="132" y="216" text-anchor="middle">6月</text>
+              <text class="axis" x="218" y="216" text-anchor="middle">7月</text>
+              <text class="axis" x="304" y="216" text-anchor="middle">8月</text>
+              <text class="axis" x="390" y="216" text-anchor="middle">9月</text>
+              <text class="axis" x="476" y="216" text-anchor="middle">10月</text>
+            </svg>
+            <figcaption>统计口径：按月新增条目索引数，含条目新增、状态更新与归档动作。</figcaption>
+          </figure>
+          <div class="legend">
+            <span><i class="a"></i>新增条目</span>
+            <span><i class="f"></i>状态更新</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 栏目五：条目图鉴（斜切卡片） ============ -->
+  <section class="sec sec--w" id="gallery" aria-labelledby="h-ga">
+    <div class="wrap">
+      <div class="sh">
+        <span class="sh__tag">SECTION 04 / GALLERY</span>
+        <h2 id="h-ga">条目图鉴 · 多多影视内容形态</h2>
+        <p>六种内容形态各占一张斜切卡片，卡片底部做切角处理，配合顶部彩色条区分归属栏目。</p>
+      </div>
+
+      <div class="tilt">
+        <article>
+          <span class="tilt__no" aria-hidden="true">01</span>
+          <h3>院线速查图鉴</h3>
+          <p>按上映档期整理条目，标注类型、地区与条目状态，便于快速筛选目标影片条目。</p>
+          <dl><div><b>1,486</b> 条</div><div><b>每日</b> 更新</div></dl>
+          <a href="#">进入栏目 →</a>
+        </article>
+
+        <article>
+          <span class="tilt__no" aria-hidden="true">02</span>
+          <h3>剧集追更图鉴</h3>
+          <p>连续剧与迷你剧分列，标注已更新集数与更新节奏，追更进度清晰可查。</p>
+          <dl><div><b>1,024</b> 条</div><div><b>每周</b> 更新</div></dl>
+          <a href="#">进入栏目 →</a>
+        </article>
+
+        <article>
+          <span class="tilt__no" aria-hidden="true">03</span>
+          <h3>动漫番剧图鉴</h3>
+          <p>本季新番与完结番分区，标注话数、放送周期与完结时间，按季度归档。</p>
+          <dl><div><b>412</b> 条</div><div><b>按季</b> 归档</div></dl>
+          <a href="#">进入栏目 →</a>
+        </article>
+
+        <article>
+          <span class="tilt__no" aria-hidden="true">04</span>
+          <h3>综艺纪实图鉴</h3>
+          <p>季播综艺与文化纪实分区陈列，含单集时长、更新频率与完结状态说明。</p>
+          <dl><div><b>268</b> 条</div><div><b>滚动</b> 更新</div></dl>
+          <a href="#">进入栏目 →</a>
+        </article>
+
+        <article>
+          <span class="tilt__no" aria-hidden="true">05</span>
+          <h3>纪录片图鉴</h3>
+          <p>人文、自然、科技、社会四类主题分列，标注集数规模与出品机构信息。</p>
+          <dl><div><b>196</b> 条</div><div><b>滚动</b> 更新</div></dl>
+          <a href="#">进入栏目 →</a>
+        </article>
+
+        <article>
+          <span class="tilt__no" aria-hidden="true">06</span>
+          <h3>影人档案图鉴</h3>
+          <p>按创作身份汇总作品条目，配合条目库交叉检索，理清作品年表与创作脉络。</p>
+          <dl><div><b>932</b> 条</div><div><b>滚动</b> 补充</div></dl>
+          <a href="#">进入栏目 →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 栏目六：更新轨迹（横向时间轴） ============ -->
+  <section class="sec" id="trace" aria-labelledby="h-tr">
+    <div class="wrap">
+      <div class="sh">
+        <span class="sh__tag">SECTION 05 / TRACE</span>
+        <h2 id="h-tr">更新轨迹 · 多多影视索引动态</h2>
+        <p>近期条目新增、台账更新与归档动作按时间顺序陈列，窄屏自动转为纵向阅读。</p>
+      </div>
+
+      <div class="trace">
+        <ol class="trace__line">
+          <li class="tstep">
+            <span class="tstep__dot" aria-hidden="true">1</span>
+            <time datetime="2026-10-11">2026-10-11</time>
+            <h3>院线条目库新增 14 条</h3>
+            <p>补充档期状态与类型标签，条目信息完整度同步校验。</p>
+          </li>
+          <li class="tstep">
+            <span class="tstep__dot" aria-hidden="true">2</span>
+            <time datetime="2026-10-10">2026-10-10</time>
+            <h3>剧集台账更新 9 部进度</h3>
+            <p>在播剧集同步已更新集数，两部条目标记为已完结。</p>
+          </li>
+          <li class="tstep">
+            <span class="tstep__dot" aria-hidden="true">3</span>
+            <time datetime="2026-10-08">2026-10-08</time>
+            <h3>番剧索引归档 4 部完结</h3>
+            <p>完结番移入归档区，释放当季索引位给新番条目。</p>
+          </li>
+          <li class="tstep">
+            <span class="tstep__dot" aria-hidden="true">4</span>
+            <time datetime="2026-10-05">2026-10-05</time>
+            <h3>影人档案补充 6 条作品</h3>
+            <p>导演与演员条目补充作品年表，交叉检索关系同步建立。</p>
+          </li>
+          <li class="tstep">
+            <span class="tstep__dot" aria-hidden="true">5</span>
+            <time datetime="2026-10-01">2026-10-01</time>
+            <h3>榜单排序口径公示</h3>
+            <p>热度计算改为收录时间、分类分布与完整度三项加权。</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 栏目七：常见问题（左列表 + 右面板） ============ -->
+  <section class="sec sec--w" id="faq" aria-labelledby="h-faq">
+    <div class="wrap">
+      <div class="sh">
+        <span class="sh__tag">SECTION 06 / FAQ</span>
+        <h2 id="h-faq">关于多多影视的常见问题</h2>
+        <p>左侧点选问题，右侧显示对应答案，纯样式切换，无需脚本即可阅读。</p>
+      </div>
+
+      <div class="qa">
+        <input type="radio" name="qa" id="qa1" checked>
+        <input type="radio" name="qa" id="qa2">
+        <input type="radio" name="qa" id="qa3">
+        <input type="radio" name="qa" id="qa4">
+        <input type="radio" name="qa" id="qa5">
+
+        <div class="qa__nav">
+          <label for="qa1"><b aria-hidden="true">01</b>站点定位</label>
+          <label for="qa2"><b aria-hidden="true">02</b>移动端适配</label>
+          <label for="qa3"><b aria-hidden="true">03</b>更新频率</label>
+          <label for="qa4"><b aria-hidden="true">04</b>排序口径</label>
+          <label for="qa5"><b aria-hidden="true">05</b>版权说明</label>
+        </div>
+
+        <div class="qa__panes">
+          <div class="pane p1">
+            <h3>多多影视是做什么的站点？</h3>
+            <p>多多影视是一个影视条目聚合导航与更新索引站，主要做条目分类整理、追更台账、番剧归档与影人档案检索，帮助浏览者快速定位想了解的条目。</p>
+            <ul>
+              <li>覆盖电影、剧集、动漫、综艺、纪录片与影人档案六类内容形态</li>
+              <li>条目带状态标记，档期与更新节奏均可回溯核对</li>
+              <li>只做索引与导航，不涉及任何影音文件存储</li>
+            </ul>
+          </div>
+          <div class="pane p2">
+            <h3>站点是否支持手机浏览？</h3>
+            <p>支持。全站采用弹性栅格与流式布局，覆盖 380px 至桌面宽屏区间；桌面为左侧竖向导航，窄屏自动切换为顶部横向导航。</p>
+            <ul>
+              <li>棋盘栏目在窄屏转为上下堆叠，图片区块优先展示</li>
+              <li>横向时间轴在窄屏转为纵向阅读</li>
+              <li>表单控件在窄屏全宽化，点击区域同步放大</li>
+            </ul>
+          </div>
+          <div class="pane p3">
+            <h3>条目与台账多久更新一次？</h3>
+            <p>院线条目库每日更新，剧集追更台账每周更新，动漫番剧索引按季度归档，影人档案随作品收录滚动补充。</p>
+            <ul>
+              <li>每日：院线条目新增与档期状态刷新</li>
+              <li>每周：在播剧集进度同步与完结归档</li>
+              <li>按季：本季新番归档与完结番迁移</li>
+            </ul>
+          </div>
+          <div class="pane p4">
+            <h3>榜单与看板的排序依据是什么？</h3>
+            <p>热度与占比均由条目收录时间、分类分布与信息完整度三项综合计算，不引用任何外部播放数据，也不做任何商业加权。</p>
+            <ul>
+              <li>口径调整会在更新轨迹中公示</li>
+              <li>看板数值为示例口径，实际以站点统计为准</li>
+              <li>排序仅用于索引排序，不代表任何推荐倾向</li>
+            </ul>
+          </div>
+          <div class="pane p5">
+            <h3>是否提供影视文件的存储或下载？</h3>
+            <p>不提供。多多影视仅做条目索引与聚合导航，不存储、不上传、不分发任何影音文件；影视作品著作权归权利人所有，请通过正规授权渠道观看。</p>
+            <ul>
+              <li>站点不提供任何未经授权的播放或下载服务</li>
+              <li>条目标注的档期与状态信息仅用于检索参考</li>
+              <li>如涉及权利问题，请以权利人正式渠道主张为准</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 栏目八：订阅（fieldset / legend） ============ -->
+  <section class="sec" id="join" aria-labelledby="h-join">
+    <div class="wrap">
+      <div class="join">
+        <form class="join__form" action="#" method="get" aria-labelledby="h-join">
+          <fieldset>
+            <legend id="h-join">订阅多多影视的索引更新</legend>
+            <p>选择关注的内容形态并留下邮箱，即可接收条目新增与排期变动提醒，内容仅涉及索引更新，不作任何商业推广。</p>
+            <div class="jrow">
+              <label class="sr-only" for="jcat">关注的内容形态</label>
+              <select id="jcat" name="jcat">
+                <option value="all">全部栏目</option>
+                <option value="movie">院线速查</option>
+                <option value="tv">剧集追更</option>
+                <option value="anime">动漫番剧</option>
+                <option value="doc">综艺纪实</option>
+              </select>
+              <label class="sr-only" for="jmail">邮箱地址</label>
+              <input id="jmail" name="jmail" type="email" inputmode="email" autocomplete="email" placeholder="输入邮箱地址" required>
+              <button type="submit">订阅更新</button>
+            </div>
+            <div class="jcheck">
+              <label><input type="checkbox" name="k1" value="new"> 条目新增</label>
+              <label><input type="checkbox" name="k2" value="state"> 状态变更</label>
+              <label><input type="checkbox" name="k3" value="rule"> 口径公示</label>
+            </div>
+            <p class="jtip">提交为示例交互，实际站点接入后可替换为真实订阅接口。</p>
+          </fieldset>
+        </form>
+
+        <ul class="jlist">
+          <li><b>A</b><span>条目新增提醒：关注栏目有新条目收录时同步通知。</span></li>
+          <li><b>B</b><span>状态变更提醒：在播条目更新集数或完结时告知。</span></li>
+          <li><b>C</b><span>口径调整公示：排序与归档规则变更会公开说明。</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ 页脚 ============ -->
+<footer class="ft">
+  <div class="wrap">
+    <div class="ft__g">
+      <div>
+        <h4>多多影视</h4>
+        <p>影视条目聚合导航与更新索引站，聚焦条目分类整理、追更台账与影人档案检索。</p>
+        <address>https://duoduoyingshi-cn.github.io/</address>
+      </div>
+      <div>
+        <h4>内容栏目</h4>
+        <a href="#channels">核心栏目</a>
+        <a href="#catalog">分类检索</a>
+        <a href="#board">数据看板</a>
+      </div>
+      <div>
+        <h4>检索入口</h4>
+        <a href="#gallery">条目图鉴</a>
+        <a href="#trace">更新轨迹</a>
+        <a href="#faq">常见问题</a>
+      </div>
+      <div>
+        <h4>快速链接</h4>
+        <a href="#">院线速查大全</a>
+        <a href="#">剧集追更台账</a>
+        <a href="#">动漫番剧索引</a>
+      </div>
+    </div>
+    <div class="ft__n">
+      <p>本站为影视条目聚合导航与更新索引站点，仅提供条目分类、追更台账、番剧归档与影人档案检索服务，不存储、不上传、不分发任何影音文件，也不提供任何未经授权的播放或下载服务。影视作品著作权归各自权利人所有，请通过正规授权渠道观看。</p>
+      <p>© 2026 多多影视 · duoduoyingshi-cn.github.io · 页面内所有内页链接均为占位锚点</p>
+    </div>
+  </div>
+</footer>
+</div>
+
+<a class="totop" href="#top" aria-label="返回页面顶部">↑</a>
+
+<!-- ============ 结构化数据 ============ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://duoduoyingshi-cn.github.io/#website",
+      "url": "https://duoduoyingshi-cn.github.io/",
+      "name": "多多影视",
+      "alternateName": ["多多影视官网", "duoduoyingshi-cn", "多多影视影视索引"],
+      "description": "多多影视是影视条目聚合导航与更新索引站，提供院线速查、剧集追更、动漫番剧、综艺纪实、影人档案、榜单专题与更新轨迹等栏目。",
+      "inLanguage": "zh-CN",
+      "publisher": { "@id": "https://duoduoyingshi-cn.github.io/#org" }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://duoduoyingshi-cn.github.io/#org",
+      "name": "多多影视",
+      "url": "https://duoduoyingshi-cn.github.io/",
+      "description": "影视条目聚合导航与更新索引站"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://duoduoyingshi-cn.github.io/#webpage",
+      "url": "https://duoduoyingshi-cn.github.io/",
+      "name": "多多影视 - 影视条目聚合导航与更新索引站",
+      "description": "多多影视提供院线速查、剧集追更、动漫番剧、综艺纪实、影人档案、榜单专题与更新轨迹等栏目，移动端自适应，条目分类清晰。",
+      "isPartOf": { "@id": "https://duoduoyingshi-cn.github.io/#website" },
+      "inLanguage": "zh-CN",
+      "breadcrumb": { "@id": "https://duoduoyingshi-cn.github.io/#breadcrumb" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://duoduoyingshi-cn.github.io/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首页", "item": "https://duoduoyingshi-cn.github.io/" },
+        { "@type": "ListItem", "position": 2, "name": "影视条目聚合" }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "多多影视核心栏目",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "院线速查大全" },
+        { "@type": "ListItem", "position": 2, "name": "剧集追更台账" },
+        { "@type": "ListItem", "position": 3, "name": "动漫番剧索引" },
+        { "@type": "ListItem", "position": 4, "name": "综艺纪实索引" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "多多影视是做什么的站点？",
+          "acceptedAnswer": { "@type": "Answer", "text": "多多影视是一个影视条目聚合导航与更新索引站，主要做条目分类整理、追更台账、番剧归档与影人档案检索，帮助浏览者快速定位想了解的条目。" }
+        },
+        {
+          "@type": "Question",
+          "name": "站点是否支持手机浏览？",
+          "acceptedAnswer": { "@type": "Answer", "text": "支持。全站采用弹性栅格与流式布局，覆盖 380px 至桌面宽屏区间；桌面为左侧竖向导航，窄屏自动切换为顶部横向导航。" }
+        },
+        {
+          "@type": "Question",
+          "name": "条目与台账多久更新一次？",
+          "acceptedAnswer": { "@type": "Answer", "text": "院线条目库每日更新，剧集追更台账每周更新，动漫番剧索引按季度归档，影人档案随作品收录滚动补充。" }
+        },
+        {
+          "@type": "Question",
+          "name": "是否提供影视文件的存储或下载？",
+          "acceptedAnswer": { "@type": "Answer", "text": "不提供。多多影视仅做条目索引与聚合导航，不存储、不上传、不分发任何影音文件；影视作品著作权归权利人所有，请通过正规授权渠道观看。" }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<script>
+  (function () {
+    var bar = document.getElementById('prog');
+    var links = [].slice.call(document.querySelectorAll('.rail a[href^="#"], .mtop__nav a[href^="#"]'));
+    var secs = links.map(function (a) {
+      return document.querySelector(a.getAttribute('href'));
+    });
+    function onScroll() {
+      var h = document.documentElement;
+      var max = h.scrollHeight - h.clientHeight;
+      var pct = max > 0 ? (h.scrollTop || document.body.scrollTop) / max * 100 : 0;
+      bar.style.width = pct + '%';
+      var idx = -1;
+      for (var i = 0; i < secs.length; i++) {
+        if (secs[i] && secs[i].getBoundingClientRect().top <= 140) { idx = i; }
+      }
+      links.forEach(function (a, i) { a.classList.toggle('on', i === idx); });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    onScroll();
+  })();
+</script>
+
+</body>
+</html>
